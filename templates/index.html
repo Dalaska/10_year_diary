@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Reminder</title>
+    <style>
+        /* Basic styling for better appearance */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+        }
+        button {
+            margin-top: 10px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background: #f9f9f9;
+            margin-bottom: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .due {
+            background-color: #ffefef;
+            border-color: #ffcccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add a Message</h1>
+    <form method="POST">
+        <textarea name="content" rows="4" required></textarea><br>
+        <button type="submit">Add Message</button>
+    </form>
+
+    <h2>Messages Due for Review</h2>
+    {% if due_messages %}
+    <ul>
+        {% for message in due_messages %}
+            <li class="due">{{ message[1] }} <br><small>(Added on {{ message[2] }})</small></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No messages due for review today.</p>
+    {% endif %}
+
+    <h2>All Messages</h2>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message[1] }} <br><small>(Added on {{ message[2] }})</small></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No messages have been added yet.</p>
+    {% endif %}
+</body>
+</html>
